@@ -17,7 +17,7 @@ Maktoub.app_name = "Dummy application"
 Maktoub.unsubscribe_method =  'unsubscribe'
 
 USERS = (1..5).map do |i|
-  Subscriber.new({name: "tester#{i}", email: "test#{i}@example.com", newsletter: true})
+  Subscriber.new({:name => "tester#{i}", :email => "test#{i}@example.com", :newsletter => true})
 end
 
 Maktoub.subscribers_extractor do

@@ -2,8 +2,8 @@ require 'premailer'
 
 module Maktoub
   class NewsletterMailer < ActionMailer::Base
-    default from: Maktoub.from,
-          parts_order: [ "text/html", "text/plain" ]
+    default :from => Maktoub.from,
+            :parts_order => [ "text/html", "text/plain" ]
 
     default_url_options[:host] = Maktoub.home_domain
 
@@ -13,13 +13,13 @@ module Maktoub
       @email = params[:email]
       @newsletter_name = newsletter_name
       mail_fields = {
-        subject: @subject,
-        to: params[:email]
+        :subject => @subject,
+        :to => params[:email]
       }
 
       premailer = Premailer.new(render("maktoub/newsletters/#{newsletter_name}").to_s,
-                        with_html_string: true,
-                        link_query_string: CGI::escape("utm_source=newsletter&utm_medium=email&utm_campaign=#{@subject}")
+                        :with_html_string => true,
+                        :link_query_string => CGI::escape("utm_source=newsletter&utm_medium=email&utm_campaign=#{@subject}")
                       )
 
       mail(mail_fields) do |format|

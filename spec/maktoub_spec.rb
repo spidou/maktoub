@@ -8,7 +8,7 @@ describe Maktoub do
       users
     end
     Maktoub.subscribers.length.should == 1
-    users << OpenStruct.new({name: "bye", email: "bye@example.com"})
+    users << OpenStruct.new({:name => "bye", :email => "bye@example.com"})
     Maktoub.subscribers.length.should == 2
   end
   

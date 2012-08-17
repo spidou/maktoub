@@ -12,7 +12,7 @@ describe Maktoub::SubscribersController do
 	describe "PUT 'update'" do
 		before(:each) do
 			@subscribers = (1..5).map do |i| 
-				Subscriber.new(name: "Subscriber #{i}", email: "subscriber#{i}@example.com", newsletter: true)
+				Subscriber.new(:name => "Subscriber #{i}", :email => "subscriber#{i}@example.com", newsletter: true)
 			end
 			Maktoub.subscribers_extractor do
 				@subscribers.select { |s| s.newsletter }

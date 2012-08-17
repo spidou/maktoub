@@ -13,7 +13,7 @@
 # require "ostruct"
 # Maktoub.subscribers_extractor do
 #   (1..5).map do |i|
-#     users << OpenStruct.new({name: "tester#{i}", email: "test#{i}@example.com"})
+#     users << OpenStruct.new({:name => "tester#{i}", :email => "test#{i}@example.com"})
 #   end
 # end
 

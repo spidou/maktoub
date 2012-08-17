@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Maktoub::NewsletterMailer do
   before(:each) do
-    @mailer = Maktoub::NewsletterMailer.publish('test_template', email: 'zaid@example.com', name: 'zaid')
+    @mailer = Maktoub::NewsletterMailer.publish('test_template', :email => 'zaid@example.com', :name => 'zaid')
 
   end
   it "should have the right subject recipient and sender" do
