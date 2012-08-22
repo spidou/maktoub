@@ -1,0 +1,14 @@
+Description:
+    Add a newsletter into the manifest and create template which will be used to write and design your newsletter
+
+Example:
+    rails generate maktoub:newsletter "This is my first Newsletter with Maktoub"
+
+
+    This will prepend content into config/maktoub_newsletters.rb:
+
+    This will create:
+        app/views/maktoub/newsletters/UNIQUEID_this_is_my_first_newsletter_with_maktoub.html.erb
+
+    This will create (only if given layout doesn't exist):
+        app/views/layouts/maktoub/LAYOUT.html.erb

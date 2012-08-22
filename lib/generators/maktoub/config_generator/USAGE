@@ -1,0 +1,9 @@
+Description:
+    Prepares your app to use maktoub to send newsletter
+
+Example:
+    rails generate maktoub:config
+
+    This will create:
+        config/initializers/maktoub.rb
+        config/maktoub_newsletters.yml

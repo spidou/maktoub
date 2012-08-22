@@ -10,9 +10,7 @@ module Maktoub
   class << self
     attr_accessor :manifest_file,
                     :from,
-                    :test_to,
-                    :subscription_preferences_url,
-                    :unsubscribe_url
+                    :test_to
 
     attr_writer :email_field
     
