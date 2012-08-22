@@ -8,7 +8,7 @@ Maktoub is a Ruby on Rails engine for email newsletters.
 == Installation
 
   # Add this line to your Gemfile
-  gem 'maktoub'
+  gem 'maktoub', :git => 'git@github.com:spidou/maktoub.git', :branch => 'new1.8'
 
 Then 'bundle install'
 
@@ -22,7 +22,6 @@ Follow instructions inside the file to configure it the way you want.
 === Authoring
 
 Create a newsletter as a normal view partial in app/views/maktoub/newsletters/.
-The subject of the newsletter will be automatically deduced from the partial's name.
 
 === Editing Styles
 
@@ -31,17 +30,21 @@ You can copy the built-in styles and override them.
 
 === Sending messages
 Maktoub comes with two rake tasks to allow you to:
-* send a test message to the "from" address of your newsletter.
+* send a test message to the "test_to" address that you have configured
 
-  rake maktoub:test['name_of_my_newsletter_partial']
+  rake maktoub:test['newsletter_id']
+
+* display the recipients list to which the newsletter will be sent if you launch 'rake maktoub:send'
+
+  rake maktoub:list['newsletter_id']
 
 * publish the newsletter to all your subscribers. If you have delayed_job installed then it will use it to deliver each email as a background job
 
-  rake maktoub:mail['name_of_my_newsletter_parial']
+  rake maktoub:send['newsletter_id']
 
 
 Alternatively you have access to a Maktoub::NewsletterMailer ActionMailer object with a publish method
-  Maktoub::NewsletterMail.publish('my_newsletter_partial', :name => 'User name', :email => 'user@example.com')
+  Maktoub::NewsletterMail.publish('newsletter_id', :email => 'user@example.com')
 
 === View in browser
 To be able to view your newsletter in a browser add it to routes.rb.

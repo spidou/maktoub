@@ -1,10 +1,11 @@
 Maktoub::Engine.routes.draw do
 
-  get "newsletter/(:newsletter)" => "archives#show", :as => "newsletter"
-
-  root :to => "archives#show"
+  if Rails.env.development?
+    get ':id' => 'compose#show', :as => 'composing_newsletter'
+    get ':id/save' => 'compose#save', :as => 'save_newsletter'
+  end
   
-  resource :subscribers, :only => [:edit, :update]
+  get 'archives/:long_id' => 'archives#show', :as => 'newsletter'
 
 end
 

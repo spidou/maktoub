@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      <%= render 'layouts/maktoub/styles' %>
+      
+      html {
+        background-color: white;
+      }
+      
+      body {
+        font-family: verdana;
+        font-size: 12px;
+        width: 700px;
+        margin: 20px auto 20px;
+        background-color: #efefef;
+        border: 2px solid #ccc;
+      }
+      
+      .header {
+        padding: 20px;
+        border-bottom: 2px solid #ccc;
+        min-height: 65px;
+      }
+      
+      .header img {
+        height: 65px;
+      }
+      
+      .archive {
+        font-size: 10px;
+        float: right;
+        text-align: right;
+      }
+      
+      .body {
+        padding: 20px;
+      }
+      
+      footer {
+        background-color: #97bafa;
+        margin-top: 10px;
+        padding: 10px 20px;
+      }
+      
+      .unsubscription {
+        font-size: 10px;
+      }
+      
+      .unsubscription p {
+        margin-top: 30px;
+        margin-bottom: 0;
+      }
+      
+      <%= yield :stylesheet %>
+    </style>
+    <title><%= @subject %></title>
+  </head>
+  <body>
+    <div class="header">
+      <%# link_to image_tag('your_logo.png', :alt => 'Your Brand'), main_app.root_url %>
+      
+      <%- unless @archive %>
+        <div class="archive">
+          Is this email not displaying correctly?<br /><%= link_to "View it in your browser", newsletter_url(@long_id), :target => "_blank" %>
+        </div>
+      <%- end %>
+    </div>
+    
+    <div class="body">
+      <%= yield %>
+      <br/>
+      <br/>
+      <p>See you soon,</p>
+      <p><strong>Your Brand</strong> Team.</p>
+    </div>
+    
+    <footer>
+      <span class="address">
+        <strong>Your Brand</strong><br/>
+        Put your address here<br/>
+        City<br/>
+        Country<br/>
+      </span>
+      
+      <div class="unsubscription">
+        <p>
+          <em>
+            You're receiving this email because you signed up for <%= link_to 'Your Brand', main_app.root_url, :target => "_blank" %> newsletters. <%= link_to 'Edit your subscription', "#", :target => "_blank" %>
+          </em>
+      </div>
+    </footer>
+  </body>
+</html>

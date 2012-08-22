@@ -4,22 +4,20 @@ module Maktoub
   class NewsletterMailer < ActionMailer::Base
     default :from => Maktoub.from,
             :parts_order => [ "text/html", "text/plain" ]
-
-    default_url_options[:host] = Maktoub.home_domain
-
-    def publish(newsletter_name, params)
-      @name = params[:name]
-      @subject = newsletter_name.humanize.titleize
+    
+    def publish(newsletter_id, params)
+      find_newsletter(newsletter_id)
+      
+      @recipient = params[:recipient]
       @email = params[:email]
-      @newsletter_name = newsletter_name
       mail_fields = {
         :subject => @subject,
         :to => params[:email]
       }
 
-      premailer = Premailer.new(render("maktoub/newsletters/#{newsletter_name}").to_s,
+      premailer = Premailer.new(render(@template, :layout => @layout).to_s,
                         :with_html_string => true,
-                        :link_query_string => CGI::escape("utm_source=newsletter&utm_medium=email&utm_campaign=#{@subject}")
+                        :link_query_string => CGI::escape("utm_source=newsletter&utm_medium=email&utm_campaign=#{@long_id}")
                       )
 
       mail(mail_fields) do |format|
@@ -27,6 +25,20 @@ module Maktoub
         format.html { premailer.to_inline_css.html_safe }
       end
     end
+    
+  private
+    # find newsletter from config yaml
+    def find_newsletter(id)
+      @id = id.to_i
+      if newsletter = Maktoub.find_newsletter(@id)
+        @subject = newsletter[:subject]
+        @long_id = newsletter[:long_id]
+        
+        @template = Maktoub.template_for(@id)
+        @layout = Maktoub.layout_for(@id)
+      end
+    end
+    
   end
 end
 
