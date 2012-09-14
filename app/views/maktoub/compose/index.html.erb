@@ -1,0 +1,21 @@
+<h1>Newsletters</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Subject</th>
+      <th>Layout</th>
+      <th>Recipients</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <% @newsletters.each do |id, attr|%>
+    <tr>
+      <td><%= id %></td>
+      <td><%= attr['subject'] %></td>
+      <td><%= attr['layout'] %></td>
+      <td><%= attr['recipients'].join(', ') if attr['recipients'].is_a?(Array) %></td>
+      <td><%= link_to "Show", composing_newsletter_url(id) %> | <%= link_to "Save to archive", save_newsletter_url(id) %> | <%= link_to "See archived version", newsletter_url(attr['long_id']) %></td>
+    </tr>
+  <% end %>
+</table>

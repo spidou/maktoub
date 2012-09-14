@@ -1,8 +1,12 @@
 module Maktoub
   class ComposeController < Maktoub::ApplicationController
-    before_filter :find_newsletter
-    before_filter :define_layout
+    before_filter :find_newsletter, :except => :index
+    before_filter :define_layout, :except => :index
     after_filter :inject_save_button, :only => :show
+    
+    def index
+      @newsletters = Maktoub.manifest_yaml.sort.reverse
+    end
     
     def show
       if @template

@@ -19,9 +19,15 @@ Then 'bundle install'
 You can run 'rails generate maktoub:config' to generate the configuration file. This task creates a matkoub.rb initializer file (in config/initializer)
 Follow instructions inside the file to configure it the way you want.
 
-=== Authoring
+=== Create a newsletter
 
-Create a newsletter as a normal view partial in app/views/maktoub/newsletters/.
+  rails generate maktoub:newsletter
+
+This generator creates a template file in app/views/maktoub/newsletters/ that will use to write your newsletter.
+
+You can display all your newsletters from this URL (only in development environment) :
+  
+  /newsletters (can be different if you mount the engine in a specific route... see below)
 
 === Editing Styles
 

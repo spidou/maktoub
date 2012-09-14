@@ -3,7 +3,7 @@ module Maktoub
     class NewsletterGenerator < Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
       
-      argument :subject, :type => :string
+      argument :subject, :type => :string, :required => false, :default => "Type your newsletter's subject here"
       class_option :layout, :type => :string, :desc => "Specify which layout you want for this newsletter"
       class_option :recipients, :type => :string, :desc => "Give an array of recipients, or a block to call to dynamically retrieve recipients"
       class_option :long_id_size, :type => :string, :default => 16, :desc => "Give the long_id size that you want (uncompatible with --long_id option)"
@@ -17,7 +17,15 @@ module Maktoub
 #{@new_id}:
   long_id: #{options.long_id || "#{@new_id}-#{generate_random_id(options.long_id_size.to_i)}"} # you can modify this as you want, but be sure it's unique
   subject: "#{subject}"
-  layout: "#{options.layout}" #TODO find a way to not write this line if options.layout is undefined
+END
+        
+        if options.layout
+          content += <<-END
+  layout: "#{options.layout}"
+END
+        end
+
+        content += <<-END
   recipients: "#{options.recipients}"
 
 END
