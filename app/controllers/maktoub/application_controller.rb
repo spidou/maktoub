@@ -27,7 +27,6 @@ module Maktoub
         </style>
         <div id="maktoub_buttons">
           <a class="view" href="#{newsletter_url(@long_id)}">See archived version</a>
-          <a class="save" href="#{save_newsletter_url(@id)}">Save this version to archive and see it</a>
         </div>
       HTML
       

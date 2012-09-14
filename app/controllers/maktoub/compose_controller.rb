@@ -16,18 +16,6 @@ module Maktoub
       end
     end
     
-    def save
-      @archive = true # hide the link to archive_url
-      if @template && data = render_to_string(@template)
-        file_path = "#{Maktoub::ARCHIVE_PATH}/#{@id}.html"
-        
-        # save to static file
-        File.open(file_path, "w") { |f| f << data }
-        
-        redirect_to newsletter_path(@long_id)
-      end
-    end
-    
   private
     # find newsletter from config yaml
     def find_newsletter
